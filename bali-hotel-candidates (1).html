@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bali Honeymoon · ホテル候補（全エリア網羅版）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#E7E4D8; --card:#F5F3EB; --ink:#14302A; --jade:#2F6A54; --brass:#B4863F;
+    --text:#20302B; --muted:#6c7a72; --hair:#cfcbbb;
+    --shadow:0 14px 34px -22px rgba(20,48,42,.5);
+    --display:'Fraunces',Georgia,serif; --body:'DM Sans',system-ui,sans-serif; --mono:'DM Mono',ui-monospace,monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--text);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;padding-bottom:96px}
+  .wrap{max-width:900px;margin:0 auto;padding:0 18px}
+
+  header.top{background:var(--ink);color:#efece0;padding:44px 0 36px}
+  .kicker{font-family:var(--mono);text-transform:uppercase;letter-spacing:.26em;font-size:11px;color:#e7c98a;margin:0 0 14px}
+  header.top h1{font-family:var(--display);font-weight:500;font-size:clamp(28px,7vw,44px);line-height:1.03;margin:0}
+  header.top p{margin:14px 0 0;color:#c3cabf;font-size:15px;max-width:56ch}
+  .rule{margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.14);font-size:13.5px;color:#d7ddce}
+  .rule b{color:#e7c98a;font-weight:500}
+  .filterbar{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
+  .fbtn{font-family:var(--mono);font-size:11px;letter-spacing:.06em;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);color:#e0e5da;border-radius:999px;padding:7px 13px;cursor:pointer}
+  .fbtn.on{background:#e7c98a;color:#14302A;border-color:#e7c98a}
+
+  .slot{padding:36px 0 8px;border-top:1px solid var(--hair)}
+  .slot:first-of-type{border-top:none}
+  .slot-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+  .slot-date{font-family:var(--mono);font-size:12px;letter-spacing:.05em;color:#fff;background:var(--jade);border-radius:6px;padding:3px 9px}
+  .slot-date.lux{background:var(--brass)}
+  .slot h2{font-family:var(--display);font-weight:500;font-size:clamp(20px,5vw,26px);margin:0;color:var(--ink)}
+  .slot .why{margin:6px 0 0;font-size:14px;color:#5b6a62}
+  .acc-rule{margin:8px 0 0;font-family:var(--mono);font-size:11px;color:var(--brass)}
+
+  .cards{display:grid;gap:14px;margin-top:18px}
+  @media(min-width:720px){.cards{grid-template-columns:1fr 1fr}}
+  .card{background:var(--card);border:1px solid var(--hair);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);position:relative;display:flex;flex-direction:column}
+  .card.sel{border-color:var(--jade);box-shadow:0 0 0 2px rgba(47,106,84,.28),var(--shadow)}
+  .card.hide{display:none}
+
+  .photo{position:relative;aspect-ratio:16/8;background:linear-gradient(135deg,#2F6A54,#14302A);display:flex;align-items:center;justify-content:center;text-align:center;padding:16px}
+  .photo.b1{background:linear-gradient(135deg,#3a7d64,#14302A)}
+  .photo.b2{background:linear-gradient(140deg,#2f7f96,#0d2b3a)}
+  .photo.b3{background:linear-gradient(130deg,#8a6a35,#2b2113)}
+  .photo.b4{background:linear-gradient(135deg,#4b6f8a,#131f2b)}
+  .photo .pname{color:#f0e2c1;font-family:var(--display);font-style:italic;font-size:clamp(15px,3.6vw,18px);line-height:1.3}
+  .photo .parea{position:absolute;top:10px;left:12px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;color:#14302A;background:#e7c98a;border-radius:4px;padding:2px 7px}
+  .photo .prec{position:absolute;top:10px;right:12px;font-family:var(--mono);font-size:11px;color:#fff;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.3);border-radius:4px;padding:2px 7px}
+
+  .body{padding:14px 16px 14px;flex:1;display:flex;flex-direction:column}
+  .card h3{font-family:var(--display);font-weight:500;font-size:17.5px;margin:0 0 2px;color:var(--ink)}
+  .stars{font-family:var(--mono);font-size:11.5px;color:var(--brass)}
+  .axes{margin:12px 0 0;display:grid;gap:9px}
+  .ax{display:grid;grid-template-columns:52px 1fr;gap:10px;font-size:13.5px;align-items:start}
+  .ax .k{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase;padding-top:3px}
+  .ax .v{color:#4c5b53}
+  .ax .v.price{font-family:var(--mono);color:var(--ink);font-size:13px}
+  .ax .v .neg{color:#8a5a3f}
+  .acc{margin-top:11px;font-size:12.5px;border-radius:8px;padding:8px 10px;line-height:1.5}
+  .acc.ok{background:#e0e8dd;color:#3c5548}
+  .acc.warn{background:#f0e7d2;color:#7d5c1f}
+  .acc b{font-family:var(--mono);font-size:11px;letter-spacing:.06em}
+
+  .links{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+  .lnk{font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-decoration:none;border:1px solid var(--hair);background:#efece1;color:#4c5b53;border-radius:7px;padding:6px 10px}
+  .lnk.map{border-color:var(--jade);color:var(--jade)}
+  .lnk:hover{background:#e6e2d4}
+  .pick{margin-top:12px;width:100%;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;border:1px solid var(--jade);background:transparent;color:var(--jade);border-radius:8px;padding:8px;cursor:pointer}
+  .card.sel .pick{background:var(--jade);color:#fff}
+
+  .totalbar{position:fixed;left:0;right:0;bottom:0;background:var(--ink);color:#efece0;padding:12px 18px;box-shadow:0 -10px 30px -18px rgba(0,0,0,.6);z-index:20}
+  .totalbar .in{max-width:900px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:14px}
+  .totalbar .lab{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#9fb0a5}
+  .totalbar .num{font-family:var(--display);font-size:clamp(18px,5vw,25px);color:#e7c98a;line-height:1.1}
+  .totalbar .cnt{font-family:var(--mono);font-size:11.5px;color:#c3cabf;text-align:right}
+  .reset{font-family:var(--mono);font-size:10.5px;color:#9fb0a5;background:none;border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:5px 9px;cursor:pointer}
+
+  footer.note{margin-top:38px;background:var(--ink);color:#cfd6cb;padding:32px 0 40px}
+  footer.note h3{font-family:var(--display);font-weight:500;color:#f3f1e4;font-size:19px;margin:0 0 12px}
+  footer.note ul{margin:0;padding-left:18px;font-size:13.5px}
+  footer.note li{margin-bottom:8px}
+  footer.note b{color:#e7c98a;font-weight:500}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <p class="kicker">Bali Honeymoon · Full Shortlist</p>
+    <h1>ホテル候補<br>全エリア網羅版</h1>
+    <p>旅程上アクセスが成立する候補をすべて掲載。各カードの<b>［選ぶ］</b>で下部に概算合計が出ます。<b>MAP</b>リンクからGoogleマップの写真ギャラリーと公式サイトに飛べます。</p>
+    <div class="rule"><b>設計：</b>休息日（9/20・9/23）は<b>前夜から</b>上級枠に入るため2泊確保。／<b>アクセス判定：</b>◎=最適　○=問題なし　△=可能だが移動が長い</div>
+    <div class="filterbar">
+      <button class="fbtn on" data-f="all">すべて表示</button>
+      <button class="fbtn" data-f="budget">予算内のみ</button>
+      <button class="fbtn" data-f="best">アクセス◎○のみ</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" id="app"></main>
+
+<footer class="note">
+  <div class="wrap">
+    <h3>注意事項</h3>
+    <ul>
+      <li><b>写真と公式サイトURLは自動取得できませんでした。</b>各カードのMAPリンク先（Googleマップ）に写真ギャラリーと公式サイトへのリンクがあります。公式URLを直接埋めたい場合は、候補を絞ってからお知らせください。</li>
+      <li><b>価格はすべて目安</b>（2名1室・9月の相場感）。実際の料金は予約サイトで要確認です。</li>
+      <li>★の評価と件数はGoogleの口コミによるものです。</li>
+      <li><b>ウルワツ／ペチャトゥの崖上リゾート</b>は眺望が随一ですが、断崖の上に建つ構造です。高所が苦手な場合は注意してください。</li>
+      <li>9/22（レンボンガン日）は朝7:30発のため、<b>チェックアウト後に荷物を車へ</b>→夕方に次の宿へチェックインする流れになります。</li>
+    </ul>
+  </div>
+</footer>
+
+<div class="totalbar">
+  <div class="in">
+    <div><div class="lab">概算合計（宿泊のみ）</div><div class="num" id="total">—</div></div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div class="cnt" id="count">0 / 5 枠</div>
+      <button class="reset" id="reset">RESET</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function M(name){return 'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(name+' Bali');}
+function W(name){return 'https://www.google.com/search?q='+encodeURIComponent(name+' Bali official site');}
+
+var SLOTS = [
+{ date:"9/17", nights:1, lux:false, title:"空港周辺 · 深夜着の1泊",
+  why:"23:30着 → 翌朝10:00にウブドへ。実質、寝るだけの一泊。",
+  rule:"アクセス条件：空港から15分圏内",
+  opts:[
+   {id:"hgi",rec:"◎",bg:"b1",area:"トゥバン",name:"Hilton Garden Inn バリ・ングラライ空港",stars:"★4.2（4,563件）",price:"1.5〜2.5万",lo:1.5,hi:2.5,budget:true,acc:"ok",accT:"空港5分。深夜着に最適",
+    loc:"空港徒歩圏。移動ストレスが最小",cont:"プール・スパ・レストラン。深夜チェックイン対応",rev:"スタッフ対応が高評価。<span class='neg'>部屋がやや古いとの指摘</span>",pid:"ChIJfSVOAhpE0i0RFI1AZ7FOUCw"},
+   {id:"anv",rec:"○",bg:"b2",area:"クタ",name:"The Anvaya Beach Resort Bali",stars:"★4.7（14,895件）",price:"2.5〜4.0万",lo:2.5,hi:4.0,budget:true,acc:"ok",accT:"空港10分",
+    loc:"ビーチフロント。空港から近い",cont:"料理教室あり。初日からリゾート感",rev:"「クタで最高の宿」。<span class='neg'>深夜着→翌朝発にはオーバースペック</span>",pid:"ChIJF70-LKBG0i0RUO3m3-Jy9BM"},
+   {id:"mandira0",rec:"△",bg:"b3",area:"レギャン",name:"Bali Mandira Beach Resort & Spa",stars:"★4.6（2,834件）",price:"2.5〜4.0万",lo:2.5,hi:4.0,budget:true,acc:"warn",accT:"空港20分。深夜の移動が少し伸びる",
+    loc:"レギャンのビーチ前。西向きでサンセット",cont:"広いプール、庭園、スパ",rev:"庭とプール、朝食が高評価",pid:"ChIJOVOWWMJG0i0R7u3pb1w7WBU"}
+  ]},
+
+{ date:"9/18", nights:1, lux:false, title:"ウブド · 手頃枠",
+  why:"バードパーク→観光→夕食。ほぼ寝るだけ。翌朝7:15に沐浴へ出発。",
+  rule:"アクセス条件：ウブド中心部（翌朝の早出に有利）",
+  opts:[
+   {id:"uvh",rec:"◎",bg:"b1",area:"ウブド中心",name:"Ubud Village Hotel",stars:"★4.6（1,168件）",price:"2.0〜3.0万",lo:2.0,hi:3.0,budget:true,acc:"ok",accT:"モンキーフォレスト通り。中心徒歩圏",
+    loc:"ウブドの中心。翌朝も動きやすい",cont:"プール、朝食ビュッフェ＋アラカルト、アフタヌーンティー",rev:"「この価格では最高のコスパ」。客室が広いと好評",pid:"ChIJHRsYxWw90i0R3XQoN0G2LLc"},
+   {id:"pur",rec:"○",bg:"b3",area:"ペンゴセカン",name:"Purana Suite Ubud",stars:"★4.8（417件）",price:"1.5〜2.5万",lo:1.5,hi:2.5,budget:true,acc:"ok",accT:"中心部まで車5分",
+    loc:"ウブド南、静かなエリア",cont:"<b>料理教室・木彫り教室・無料ヨガ</b>",rev:"接客とアフタヌーンティーが好評。<span class='neg'>1泊では体験を使い切れない</span>",pid:"ChIJke4dzZ490i0Ri2_1E-AeRaY"},
+   {id:"mer",rec:"○",bg:"b4",area:"ビスマ通り",name:"Meruhdani Boutique Hotel Ubud",stars:"★4.4（405件）",price:"1.0〜2.0万",lo:1.0,hi:2.0,budget:true,acc:"ok",accT:"王宮まで徒歩",
+    loc:"ビスマ通り。中心徒歩圏",cont:"プール。スパの評価が非常に高い",rev:"コスパ良好。<span class='neg'>客室がコンパクト</span>",pid:"ChIJTX0yQhU90i0RrkJMHgMUQm8"}
+  ]},
+
+{ date:"9/19-20", nights:2, lux:true, title:"ウブド · 上級枠（休息日を含む）",
+  why:"9/20をまるごとヴィラで。朝から楽しむため前夜（9/19）から入ります。",
+  rule:"アクセス条件：ウブド圏。9/20は終日滞在なので郊外でも可",
+  opts:[
+   {id:"kam",rec:"◎",bg:"b1",area:"ウブド中心",name:"Royal Kamuela Villas（モンキーフォレスト）",stars:"★4.9（1,380件）",price:"6〜9万",lo:6,hi:9,budget:true,acc:"ok",accT:"中心徒歩圏。渋滞のウブドで有利",
+    loc:"市場・王宮・モンキーフォレストが徒歩圏",cont:"プライベートプール付ヴィラ。<b>大人限定</b>。スパが高評価",rev:"候補中トップの4.9。「朝、猿の声で目覚める」",pid:"ChIJAc9KNm090i0R6oLNXr4PtRs"},
+   {id:"uda",rec:"◎",bg:"b3",area:"スリウェダリ",name:"The Udaya Resorts & Spa",stars:"★4.8（1,347件）",price:"5〜8万",lo:5,hi:8,budget:true,acc:"ok",accT:"中心から車5分",
+    loc:"中心から少し外れて静か",cont:"<b>朝ヨガ・ネイチャーハイクが宿泊に込み</b>",rev:"食事と朝食が高評価。<span class='neg'>設備メンテの指摘あり</span>",pid:"ChIJmWJfl0w90i0RjE7oFuTs8Hk"},
+   {id:"kom",rec:"◎",bg:"b4",area:"ビスマ通り",name:"Komaneka at Bisma",stars:"★4.8（1,298件）",price:"5〜8万",lo:5,hi:8,budget:true,acc:"ok",accT:"中心から数百m",
+    loc:"街に近いのに驚くほど静か",cont:"渓谷と棚田ビュー、インフィニティプール、アフタヌーンティー込み",rev:"「初日に全員の名前を覚えてくれた」",pid:"ChIJx34FoWw90i0RqOr9rcbtD8k"},
+   {id:"kayon",rec:"◎",bg:"b1",area:"パヤンガン",name:"The Kayon Jungle Resort",stars:"★4.8（2,491件）",price:"5〜9万",lo:5,hi:9,budget:true,acc:"ok",accT:"中心から30分。<b>沐浴・棚田方面には近い</b>",
+    loc:"渓谷の奥。ジャングルに囲まれた立地",cont:"名物の渓谷インフィニティプール、ヨガ・アクティビティ込み、送迎あり",rev:"ハネムーン利用の口コミ多数。「魔法のようだった」",pid:"ChIJjQkT2wwi0i0RlGV0GoFg6fs"},
+   {id:"pita",rec:"○",bg:"b2",area:"サンギンガン",name:"Pita Maha Resort & Spa",stars:"★4.8（1,183件）",price:"5〜8万",lo:5,hi:8,budget:true,acc:"ok",accT:"中心へ<b>無料シャトル</b>",
+    loc:"渓谷沿い。中心から15分",cont:"伝統建築のヴィラ、巨大インフィニティプール",rev:"「サービス100点」。ジャングル感が強い",pid:"ChIJR2iTk2oZ0i0RCfBaqUMzBr4"},
+   {id:"wul",rec:"○",bg:"b3",area:"クデワタン",name:"Puri Wulandari A Boutique Resort & Spa",stars:"★4.6（774件）",price:"5〜8万",lo:5,hi:8,budget:true,acc:"ok",accT:"中心から10〜15分",
+    loc:"渓谷を望む静かな丘。敷地内はバギー移動",cont:"全室プライベートプール付ヴィラ、アフタヌーンティー込み",rev:"「ハネムーンで滞在。貸切のように静か」。料理が高評価",pid:"ChIJuYpc-dIi0i0RF-jKNyBBnWA"},
+   {id:"vis",rec:"○",bg:"b4",area:"スウェタ通り",name:"Visesa Ubud Resort",stars:"★4.6（2,025件）",price:"4〜7万",lo:4,hi:7,budget:true,acc:"ok",accT:"中心から15分。シャトルあり",
+    loc:"田園に囲まれた広い敷地",cont:"敷地内に田んぼと農場。体験プログラムが豊富",rev:"コスパ良好。<span class='neg'>夜は敷地が暗い</span>",pid:"ChIJXRkjuUs90i0RRsQurrz61Q8"},
+   {id:"como",rec:"○",bg:"b2",area:"クデワタン",name:"COMO Uma Ubud",stars:"★4.8（984件）",price:"8〜15万",lo:8,hi:15,budget:false,acc:"ok",accT:"中心から10分",
+    loc:"ウブド北西。主要スポットへ好アクセス",cont:"COMO Shambhalaのスパ、サイクリングツアー",rev:"ハネムーン利用多数。<span class='neg'>プールヴィラは予算超</span>",pid:"ChIJD7l4NjE90i0RGLP1Vw4y_Ho"},
+   {id:"fss",rec:"○",bg:"b1",area:"サヤン",name:"Four Seasons Resort Bali at Sayan",stars:"★4.8（1,718件）",price:"15〜25万",lo:15,hi:25,budget:false,acc:"ok",accT:"中心から10分",
+    loc:"アユン川を見下ろす渓谷。吊り橋のエントランスが名物",cont:"料理教室、ラフティング、世界水準のスパ",rev:"「バリで最高のホテル」。<span class='neg'>予算を大きく超過</span>",pid:"ChIJzdUYSsUi0i0R73icGTwBtn8"},
+   {id:"mand",rec:"○",bg:"b3",area:"クデワタン",name:"Mandapa, a Ritz-Carlton Reserve",stars:"★4.7（1,919件）",price:"15〜30万",lo:15,hi:30,budget:false,acc:"ok",accT:"中心から10分",
+    loc:"アユン渓谷。バリ最高級の一角",cont:"専属バトラー、複数のレストラン、スパ",rev:"「ハネムーンで泊まった中で人生最高」。<span class='neg'>予算を大きく超過</span>",pid:"ChIJI_3sXcMi0i0RLXYUYYo7eT4"}
+  ]},
+
+{ date:"9/21", nights:1, lux:false, title:"南部 · 手頃枠",
+  why:"ウルワツから戻って寝るだけ。翌朝7:30にサヌール港へ出発。",
+  rule:"アクセス条件：翌朝サヌール港まで50分以内（チャング圏は除外）",
+  opts:[
+   {id:"meru",rec:"◎",bg:"b1",area:"サヌール",name:"The Meru Sanur",stars:"★4.7（1,968件）",price:"3.0〜5.0万",lo:3.0,hi:5.0,budget:true,acc:"ok",accT:"港まで5〜10分。<b>翌朝が最短</b>",
+    loc:"サヌール北。港に至近",cont:"新しく綺麗、広い客室、複数プール。朝食が高評価",rev:"温水洗浄トイレなど日本人に好評。接客も高評価",pid:"ChIJnbJZqk5B0i0REXFlh0fjll8"},
+   {id:"prama",rec:"◎",bg:"b2",area:"サヌール",name:"Prama Sanur Beach Hotel Bali",stars:"★4.4（5,809件）",price:"2.0〜3.0万",lo:2.0,hi:3.0,budget:true,acc:"ok",accT:"港まで10分",
+    loc:"サヌールのビーチ沿い",cont:"プライベートビーチ、大きなプール、遊歩道",rev:"スタッフは好評。<span class='neg'>客室は古く「3つ星相当」</span>",pid:"ChIJl9NSoZVB0i0RmkW-5nyvEDI"},
+   {id:"icsanur",rec:"○",bg:"b4",area:"サヌール",name:"InterContinental Bali Sanur Resort",stars:"★4.1（629件）",price:"3.0〜5.0万",lo:3.0,hi:5.0,budget:true,acc:"ok",accT:"港まで10分",
+    loc:"サヌールのビーチ前。周辺に飲食店が多い",cont:"広い客室、3種のプール、ビーチのデイベッド",rev:"客室の広さと朝食が好評。<span class='neg'>評価のばらつきが大きい</span>",pid:"ChIJmSFJB0RB0i0Rax5CMhO2DPw"},
+   {id:"ndbh",rec:"○",bg:"b3",area:"ヌサドゥア",name:"Nusa Dua Beach Hotel & Spa",stars:"★4.6（5,062件）",price:"3.0〜5.0万",lo:3.0,hi:5.0,budget:true,acc:"ok",accT:"港まで40分",
+    loc:"ヌサドゥアの観光特区。整備され歩きやすい",cont:"プライベートビーチ、複数プール、スパ",rev:"「今まで泊まった中で最高の朝食」。食事の評価が突出",pid:"ChIJa8cS2yND0i0RFFJuXKvOB5M"},
+   {id:"mandira",rec:"○",bg:"b1",area:"レギャン",name:"Bali Mandira Beach Resort & Spa",stars:"★4.6（2,834件）",price:"2.5〜4.0万",lo:2.5,hi:4.0,budget:true,acc:"warn",accT:"港まで45分",
+    loc:"レギャンのビーチ前。西向きでサンセット",cont:"広いプール、庭園、スパ、ライブ演奏",rev:"庭・プール・朝食が高評価。リピーターが多い",pid:"ChIJOVOWWMJG0i0R7u3pb1w7WBU"},
+   {id:"lbh",rec:"○",bg:"b2",area:"レギャン",name:"Legian Beach Hotel Bali",stars:"★4.4（3,067件）",price:"2.0〜3.5万",lo:2.0,hi:3.5,budget:true,acc:"warn",accT:"港まで45分",
+    loc:"レギャンのビーチ前",cont:"大人専用プールを含む2つのプール、朝食ビュッフェ",rev:"「朝食が圧巻」。<span class='neg'>客室はやや古め</span>",pid:"ChIJ8yyYDOdG0i0Ra-NWOmBfoqE"}
+  ]},
+
+{ date:"9/22-23", nights:2, lux:true, title:"南部 · 上級枠（最終日の休息日）",
+  why:"9/23をまるごと宿で。夜21:45に空港へ向かうため、レイトチェックアウトや荷物預かりが効きます。",
+  rule:"アクセス条件：9/22夕方にサヌール港から戻れる／9/23夜に空港へ出られる",
+  opts:[
+   {id:"conrad",rec:"◎",bg:"b2",area:"タンジュン・ブノア",name:"Conrad Bali",stars:"★4.7（6,771件）",price:"4〜8万",lo:4,hi:8,budget:true,acc:"ok",accT:"港35分／空港25分。<b>全方位バランス最良</b>",
+    loc:"半島東側。GWK・ウルワツにも出やすい",cont:"プライベートビーチ、大型プール、レストラン多数、スパ",rev:"「深夜便のため荷物預かりとシャワーを使わせてもらえた」<span class='neg'>一部やや古い</span>",pid:"ChIJzR9XaA9D0i0RKM9T4eQUmdo"},
+   {id:"ayana",rec:"◎",bg:"b3",area:"ジンバラン",name:"AYANA Resort Bali",stars:"★4.7（11,590件）",price:"5〜9万",lo:5,hi:9,budget:true,acc:"ok",accT:"港50分／空港20分。<b>西向きでサンセット</b>",
+    loc:"ジンバランの崖上。広大な敷地をカートで移動",cont:"複数のプール・レストラン、スパ、Rock Bar（崖下・任意）",rev:"「今まで泊まった5つ星の中で別格」。<span class='neg'>敷地が広大で人も多い</span>",pid:"ChIJpRD09opE0i0RykahkXbmPjE"},
+   {id:"mulia",rec:"◎",bg:"b4",area:"ヌサドゥア",name:"Mulia Resort · Nusa Dua",stars:"★4.6（9,187件）",price:"5〜10万",lo:5,hi:10,budget:true,acc:"ok",accT:"港40分／空港25分",
+    loc:"ヌサドゥア南、白砂のビーチ前",cont:"<b>食事の評価が突出</b>（朝食・ディナービュッフェ、鉄板焼、中華）、バトラー対応",rev:"「ハネムーンで滞在。温水洗浄便座まで快適だった」",pid:"ChIJq0s9w81c0i0R9sO_piKMC8E"},
+   {id:"laguna",rec:"◎",bg:"b1",area:"ヌサドゥア",name:"The Laguna, a Luxury Collection Resort & Spa",stars:"★4.7（3,674件）",price:"5〜8万",lo:5,hi:8,budget:true,acc:"ok",accT:"港40分／空港25分",
+    loc:"ヌサドゥア中心。ビーチと直結",cont:"客室前まで来るラグーンプール、スパ、複数レストラン",rev:"「ハネムーンに最高の舞台」。接客の評価が非常に高い",pid:"ChIJGVcbnCZD0i0Rgr93Q2UcMds"},
+   {id:"maya",rec:"◎",bg:"b2",area:"サヌール",name:"Maya Sanur Resort & Spa",stars:"★4.8（6,668件）",price:"4〜6万",lo:4,hi:6,budget:true,acc:"ok",accT:"港10分。<b>レンボンガン日に最短</b>／空港30分",
+    loc:"サヌール中心。前泊地から動かなくて済む",cont:"158mのラグーンプール、スパ、ビーチ",rev:"接客が高評価。<span class='neg'>ラグーンプールは分割式との指摘</span>",pid:"ChIJm8XKLsZB0i0R6QtMj8jLCA8"},
+   {id:"indigo",rec:"○",bg:"b3",area:"スミニャック",name:"Hotel Indigo Bali Seminyak Beach",stars:"★4.8（8,595件）",price:"5〜8万",lo:5,hi:8,budget:true,acc:"ok",accT:"港45分／空港40分。<b>西向きでサンセット</b>",
+    loc:"スミニャックのビーチ前。飲食店街が徒歩圏",cont:"デザイン性の高い館内、複数レストラン、朝食ビュッフェが絶賛",rev:"「今まで泊まった中で最高」の声多数",pid:"ChIJk6Zg2R1H0i0R3qSXgY5tnm8"},
+   {id:"sbr",rec:"○",bg:"b4",area:"スミニャック",name:"The Seminyak Beach Resort & Spa",stars:"★4.8（2,772件）",price:"4〜6万",lo:4,hi:6,budget:true,acc:"ok",accT:"港45分／空港35分",
+    loc:"カユアヤ通り、ビーチ正面。レストラン街が徒歩圏",cont:"海を望むインフィニティプール、スパ、庭園",rev:"「コスパが非常に高い」。庭とプールが好評",pid:"ChIJzcxjwRpH0i0RkCvrbJ5wmL8"},
+   {id:"d6",rec:"○",bg:"b1",area:"スミニャック",name:"Double Six Luxury Hotel",stars:"★4.7（3,114件）",price:"4〜6万",lo:4,hi:6,budget:true,acc:"ok",accT:"港45分／空港30分",
+    loc:"ダブルシックス・ビーチ前。平坦で歩きやすい",cont:"プランジプール付客室、屋上バー、サンセットビュー",rev:"スタッフの評価が非常に高い。館内レストランも好評",pid:"ChIJ______8j0i0R4BuF3WaH_qQ"},
+   {id:"mono",rec:"○",bg:"b2",area:"ウマラス",name:"Monolocale Resort & Spa Seminyak",stars:"★4.8（1,309件）",price:"4〜6万",lo:4,hi:6,budget:true,acc:"ok",accT:"港50分／空港40分",
+    loc:"スミニャック内陸side。静かなヴィラ地区",cont:"プライベートプール付き客室、スパ、WhatsApp対応",rev:"「ハネムーンで滞在。完璧だった」の声が多数",pid:"ChIJEU9bU6BH0i0RjM-CzgaUJVs"},
+   {id:"stregis",rec:"○",bg:"b3",area:"ヌサドゥア",name:"The St. Regis Bali Resort",stars:"★4.8（2,797件）",price:"10〜18万",lo:10,hi:18,budget:false,acc:"ok",accT:"港40分／空港25分",
+    loc:"ヌサドゥア南。白砂のプライベートビーチ",cont:"バトラーサービス、プライベートプール付ヴィラ、ラグーン",rev:"「完璧」の評価。<span class='neg'>予算超過</span>",pid:"ChIJlxcgYM1c0i0RIbLfYRwiJDo"},
+   {id:"fsj",rec:"○",bg:"b4",area:"ジンバラン",name:"Four Seasons Resort Bali at Jimbaran Bay",stars:"★4.7（2,760件）",price:"15〜25万",lo:15,hi:25,budget:false,acc:"ok",accT:"港50分／空港20分",
+    loc:"ジンバラン湾。空港に近く最終日に有利",cont:"全室ヴィラ、スパ、複数レストラン",rev:"「フォーシーズンズの中でも最高」。<span class='neg'>予算を大きく超過</span>",pid:"ChIJ6cVf9fFE0i0RogyvBWu4WuM"},
+   {id:"hicanggu",rec:"△",bg:"b1",area:"チャング",name:"Holiday Inn Resort Bali Canggu",stars:"★4.9（1,590件）",price:"3〜5万",lo:3,hi:5,budget:true,acc:"warn",accT:"港70分／空港45分。<b>9/22の帰路が長い</b>",
+    loc:"バトゥボロン・ビーチ近く。西向きでサンセット",cont:"屋上インフィニティプール、複数レストラン、ヨガ",rev:"<b>今回調べた中で最高評価</b>。ハネムーン利用の口コミあり",pid:"ChIJ40q87YdH0i0R8Xb0ivd1zS0"},
+   {id:"swarga",rec:"△",bg:"b2",area:"チャング",name:"Swarga Suites Bali Berawa",stars:"★4.7（2,938件）",price:"3〜5万",lo:3,hi:5,budget:true,acc:"warn",accT:"港70分／空港45分",
+    loc:"ブラワ・ビーチへ専用入口",cont:"プールアクセス客室、屋上バー",rev:"「バリで泊まった中で一番」。接客が高評価",pid:"ChIJeQprjINH0i0RCK4KmSX01Is"},
+   {id:"comocanggu",rec:"△",bg:"b3",area:"チャング",name:"COMO Uma Canggu",stars:"★4.6（1,651件）",price:"7〜12万",lo:7,hi:12,budget:false,acc:"warn",accT:"港75分／空港50分",
+    loc:"エコービーチ前。ビーチフロント",cont:"COMOビーチクラブ、スパ、サンセット",rev:"「派手さより心地よさ」。食事が高評価",pid:"ChIJCRXoOHY40i0RP5b3E30CF7Y"},
+   {id:"regent",rec:"△",bg:"b4",area:"チャング",name:"Regent Bali Canggu",stars:"★4.7（476件）",price:"8〜15万",lo:8,hi:15,budget:false,acc:"warn",accT:"港70分／空港45分",
+    loc:"バトゥボロン。新しい高級ホテル",cont:"スイムアップ客室、ビーチクラブ、無料ランドリー",rev:"「最も洗練された滞在」。<span class='neg'>口コミ件数はまだ少なめ</span>",pid:"ChIJH65PHIhH0i0RyYYTzGXsVIE"},
+   {id:"alila",rec:"△",bg:"b1",area:"ウルワツ",name:"Alila Villas Uluwatu",stars:"★4.7（2,276件）",price:"15〜25万",lo:15,hi:25,budget:false,acc:"warn",accT:"港60分／空港40分。<b>断崖の上（高所注意）</b>",
+    loc:"ウルワツの崖上。100m下に海",cont:"全室プール付ヴィラ、崖上のインフィニティプール",rev:"建築とデザインが絶賛。<span class='neg'>高所が苦手なら不向き・予算超</span>",pid:"ChIJweE3dN1a0i0RpjAjIkXxCLY"},
+   {id:"ungasan",rec:"△",bg:"b2",area:"ウンガサン",name:"The Ungasan Clifftop Resort",stars:"★4.7（1,330件）",price:"10〜20万",lo:10,hi:20,budget:false,acc:"warn",accT:"港60分／空港35分。<b>断崖の上（高所注意）</b>",
+    loc:"崖上。Sundays Beach Clubへ直結",cont:"崖際のインフィニティプール付ヴィラ、バトラー",rev:"「カップルに最高」。<span class='neg'>高所が苦手なら不向き・予算超</span>",pid:"ChIJP7-ZPBtb0i0RGJP9eqgiDok"},
+   {id:"anantara",rec:"△",bg:"b3",area:"ウルワツ",name:"Anantara Uluwatu Bali Resort",stars:"★4.5（2,798件）",price:"8〜15万",lo:8,hi:15,budget:false,acc:"warn",accT:"港60分／空港40分。<b>崖の上（高所注意）</b>",
+    loc:"ウルワツの崖上。夕陽の眺望",cont:"オーシャンビュー客室、スパ、複数レストラン",rev:"接客は高評価だが、<span class='neg'>老朽化・虫の指摘が複数</span>",pid:"ChIJv5Tx3UVF0i0RQ2jeB0yfNfQ"}
+  ]}
+];
+
+var picked = {}, filter = 'all';
+
+function render(){
+  var app = document.getElementById('app'); app.innerHTML = '';
+  SLOTS.forEach(function(s, si){
+    var sec = document.createElement('section'); sec.className = 'slot';
+    var head = '<div class="slot-head"><span class="slot-date'+(s.lux?' lux':'')+'">'+s.date+' ／ '+s.nights+'泊</span><h2>'+s.title+'</h2></div>'+
+               '<p class="why">'+s.why+'</p><p class="acc-rule">'+s.rule+'</p>';
+    var cards = '<div class="cards">';
+    s.opts.forEach(function(o){
+      var sel = picked[si] === o.id;
+      var hide = (filter==='budget' && !o.budget) || (filter==='best' && o.acc!=='ok');
+      cards += '<div class="card'+(sel?' sel':'')+(hide?' hide':'')+'">'+
+        '<div class="photo '+o.bg+'"><span class="parea">'+o.area+'</span><span class="prec">'+o.rec+'</span><span class="pname">'+o.name+'</span></div>'+
+        '<div class="body">'+
+        '<h3>'+o.name+'</h3><div class="stars">'+o.stars+'</div>'+
+        '<div class="axes">'+
+          '<div class="ax"><div class="k">価格</div><div class="v price">'+o.price+' / 泊</div></div>'+
+          '<div class="ax"><div class="k">立地</div><div class="v">'+o.loc+'</div></div>'+
+          '<div class="ax"><div class="k">内容</div><div class="v">'+o.cont+'</div></div>'+
+          '<div class="ax"><div class="k">口コミ</div><div class="v">'+o.rev+'</div></div>'+
+        '</div>'+
+        '<div class="acc '+(o.acc==='ok'?'ok':'warn')+'"><b>アクセス '+(o.acc==='ok'?'○':'△')+'</b>　'+o.accT+'</div>'+
+        '<div class="links">'+
+          '<a class="lnk map" href="'+M(o.name)+'" target="_blank" rel="noopener">MAP・写真 →</a>'+
+          '<a class="lnk" href="'+W(o.name)+'" target="_blank" rel="noopener">公式サイト →</a>'+
+        '</div>'+
+        '<button class="pick" data-s="'+si+'" data-o="'+o.id+'">'+(sel?'✓ 選択中':'選ぶ')+'</button>'+
+        '</div></div>';
+    });
+    cards += '</div>';
+    sec.innerHTML = head + cards; app.appendChild(sec);
+  });
+  document.querySelectorAll('.pick').forEach(function(b){
+    b.addEventListener('click', function(){
+      var si=+b.dataset.s, oid=b.dataset.o;
+      picked[si] = (picked[si]===oid) ? null : oid;
+      render(); total();
+    });
+  });
+}
+function total(){
+  var lo=0, hi=0, n=0;
+  SLOTS.forEach(function(s, si){
+    var id=picked[si]; if(!id) return;
+    var o=s.opts.filter(function(x){return x.id===id})[0]; if(!o) return;
+    lo+=o.lo*s.nights; hi+=o.hi*s.nights; n++;
+  });
+  document.getElementById('total').textContent = n ? (lo.toFixed(1)+' 〜 '+hi.toFixed(1)+' 万円') : '—';
+  document.getElementById('count').textContent = n+' / 5 枠';
+}
+document.querySelectorAll('.fbtn').forEach(function(b){
+  b.addEventListener('click', function(){
+    document.querySelectorAll('.fbtn').forEach(function(x){x.classList.remove('on')});
+    b.classList.add('on'); filter=b.dataset.f; render(); total();
+  });
+});
+document.getElementById('reset').addEventListener('click', function(){ picked={}; render(); total(); });
+render(); total();
+</script>
+</body>
+</html>
